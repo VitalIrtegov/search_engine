@@ -5,28 +5,29 @@
 #include <boost/tokenizer.hpp>
 
 void Search::setSearch() {
-    std::ifstream in("C:/drugs/beta.txt");
-
-    //std::cout << "open" << std::endl;
+    std::ifstream file("C:/drugs/beta.txt");
     std::string line;
 
-    if (in.is_open()) {
-        //std::cout << "read" << std::endl;
+    if (file.is_open()) {
         typedef boost::tokenizer<boost::char_separator<char>> tokenizer;
         boost::char_separator<char> sep("-);|(, :\"\'./[]!_?><%");
 
-        while (getline(in, line)) {
+        while (getline(file, line)) {
+            std::transform(line.begin(), line.end(), line.begin(), tolower);
             tokenizer tokens(line, sep);
-            for (tokenizer::iterator tok_iter = tokens.begin(); tok_iter != tokens.end(); ++tok_iter) {
-                words.insert(*tok_iter);
-                //std::cout << "<" << *tok_iter << "> ";
+            for (tokenizer::iterator iter = tokens.begin(); iter != tokens.end(); ++iter) {
+                words.emplace(*iter, words[*iter]++);
             }
         }
     }
-
-    in.close();
+    file.close();
 }
 
-std::set<std::string> Search::getSearch() {
+
+
+
+std::map<std::string, size_t> Search::getSearch() {
     return words;
 }
+
+//std::vector<int, std::map<std::string, size_t>> vector;

@@ -12,9 +12,7 @@ include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIR})
 link_libraries(ws2_32 wsock32)
 
-
 add_executable(search_engine main.cpp include/searchFiles.h src/searchFiles.cpp)
-
 
 target_link_libraries(search_engine ${Boost_LIBRARIES})
 

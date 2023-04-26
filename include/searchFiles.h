@@ -1,14 +1,14 @@
 #pragma once
 
-#include <set>
+#include <map>
 #include <string>
 
 class Search {
 private:
-    std::set<std::string> words;
+    std::map<std::string, size_t> words;
 public:
     Search () { };
     void setSearch();
-    std::set<std::string> getSearch();
+    std::map<std::string, size_t> getSearch();
 };
 

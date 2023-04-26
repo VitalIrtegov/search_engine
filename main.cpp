@@ -4,9 +4,9 @@
 int main() {
     Search search;
     search.setSearch();
-    std::set<std::string> set = search.getSearch();
+    std::map<std::string, size_t> map = search.getSearch();
 
-    for (std::string item : set) {
-        std::cout << item << std::endl;
+    for (auto item : map) {
+        std::cout << item.first << ", " << item.second << std::endl;
     }
 }
