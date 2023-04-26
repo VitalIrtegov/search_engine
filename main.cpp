@@ -4,5 +4,4 @@
 int main() {
     Search search;
     search.setSearch();
-
 }
