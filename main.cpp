@@ -10,10 +10,14 @@ int main() {
 
     Search search;
 
-    std::string str = "string";
-    size_t t1 = 3;
-    size_t t2 = 8;
-    search.setDictionary(str, t1, t2);
+    std::vector<std::string> vecPaths = search.getSearchPaths(dir);
+
+    for (auto i: vecPaths) {
+        std::map<std::string, size_t> words = search.getWords(i);
+    }
+
+    /*std::string str = "string";
+    search.setDictionary(str, vecPaths);
 
     std::map<std::string, std::map<size_t, size_t>> dictionary = search.getDictionary();
 
@@ -22,7 +26,7 @@ int main() {
         for (auto j : i.second) {
             std::cout << "<" << j.first << ">, <" << j.second << ">" << std::endl;
         }
-    }
+    }*/
 
 }
 

@@ -12,8 +12,10 @@ std::vector<std::string> Search::getSearchPaths(const std::string &dir) {
     auto recursiveGetFileNamesByExtension = [](const std::string &path) {
         std::vector<std::string> paths;
         for(auto &p: fs::recursive_directory_iterator(path))
-            if(p.is_regular_file() && p.path().extension().compare("txt") != 0)
+            if(p.is_regular_file() && p.path().extension().compare("txt") != 0) {
                 paths.push_back(p.path().string());
+                //std::cout << p.path().string() << std::endl;
+            }
         return paths;
     };
     return std::move(recursiveGetFileNamesByExtension(dir));
@@ -40,9 +42,16 @@ std::map<std::string, size_t> Search::getWords(const std::string &path) {
     return words;
 }
 
-void Search::setDictionary(std::string &str, size_t &t1, size_t &t2) {
+void Search::setDictionary(std::string &str, std::vector<std::string> vecPaths) {
     std::map<size_t, size_t> map;
-    map.insert(std::make_pair(t1, t2));
+    //map.insert(std::make_pair(t1, t2));
+
+    for (auto item : vecPaths) {
+        std::map<std::string, size_t> res = getWords(item);
+        std::map<std::string, size_t>::iterator it = res.begin();
+        //auto it = getWords(item);
+    }
+
     dictionary.insert(std::make_pair(str, map));
 }
 
