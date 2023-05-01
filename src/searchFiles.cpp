@@ -46,12 +46,11 @@ void Search::setDictionary(std::string &str, std::vector<std::string> vecPaths) 
     std::map<size_t, size_t> map;
     //map.insert(std::make_pair(t1, t2));
 
-    for (auto item : vecPaths) {
+    for (const auto& item : vecPaths) {
         std::map<std::string, size_t> res = getWords(item);
-        std::map<std::string, size_t>::iterator it = res.begin();
-        //auto it = getWords(item);
+        auto it = res.find(str);
+        map.insert(std::make_pair(1, it->second));
     }
-
     dictionary.insert(std::make_pair(str, map));
 }
 
