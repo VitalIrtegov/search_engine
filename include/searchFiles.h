@@ -26,7 +26,7 @@ typedef std::vector<std::pair<std::string, std::vector<RelativeIndex>>> vectorRe
 
 class SearchEngine {
 private:
-    size_t max_response = 3;
+    size_t max_response;
     SearchEngine() = default;
 public:
     static std::vector<std::string> getSearchPaths(const std::string &dir);

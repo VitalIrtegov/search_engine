@@ -46,6 +46,8 @@ std::vector<RelativeIndex> SearchEngine::find(std::string line) {
 
     std::sort(vec.begin(), vec.end(), [](const auto &a, const auto &b) { return b.sum < a.sum; });
 
+    max_response = Settings::getInstance().max_response;
+
     max_response = max_response > vecOutput.size() ? max_response : vecOutput.size();
 
     for (int i = 0; i < max_response; i++)

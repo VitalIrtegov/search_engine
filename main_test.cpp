@@ -106,9 +106,7 @@ TEST(TestCaseSearchServer, TestSimple) {
 
     ASSERT_EQ(result, expected);
 }
-
 */
-
 
 
 int main(int argc, char **argv) {
