@@ -1,0 +1,24 @@
+{
+  "config": {
+    "Name": "SearchEngine",
+    "Version": "0.1",
+    "max_response": 7
+  },
+  "files": [
+    "C:/textTest/2cb.txt",
+    "C:/textTest/beta.txt",
+    "C:/textTest/bbros-09.txt",
+    "C:/textTest/bbros-10.txt",
+    "C:/textTestv/bbrosn11.txt",
+    "C:/textTest/bbrosn14.txt",
+    "C:/textTest/bbrosn13.txt",
+    "C:/textTest/drugs.txt",
+    "C:/textTest/drugs2.txt",
+    "C:/textTest/pikhal1.txt",
+    "C:/textTest/pikhal2.txt",
+    "C:/textTest/pikhal3.txt",
+    "C:/textTest/pikhal4.txt",
+    "C:/textTest/pikhal5.txt",
+    "C:/textTest/pikhal6.txt"
+  ]
+}

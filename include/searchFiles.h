@@ -4,28 +4,38 @@
 #include <string>
 #include <vector>
 #include <thread>
-#include <mutex>
 
-class Search {
+struct RelativeIndex {
+    size_t ind;
+    size_t sum;
+    float rankInd;
+    RelativeIndex(size_t a, size_t b) : ind(a), sum(b), rankInd{} {};
+};
 
+struct Settings {
+    std::string name;
+    std::string version;
+    size_t max_response;
+    std::vector<std::string> files;
+
+    void showSettings() const;
+    static Settings &getInstance();
+};
+
+typedef std::vector<std::pair<std::string, std::vector<RelativeIndex>>> vectorRes;
+
+class SearchEngine {
 private:
-    //std::vector<std::string> paths;
-    std::map<std::string, size_t> words;
-    std::map<std::string, std::map<size_t, size_t>> dictionary;
-    std::vector<std::string> vecPaths1;
+    size_t max_response = 3;
+    SearchEngine() = default;
 public:
-    size_t max_response = 5;
-    std::mutex myMutex;
+    static std::vector<std::string> getSearchPaths(const std::string &dir);
+    std::vector<RelativeIndex> find(std::string s);
+    vectorRes getAnswers(std::vector<std::string> req);
+    //static void setMaxResponse(size_t max_response);
 
-    struct RI {
-        size_t ind;
-        size_t sum;
-        RI(size_t a, size_t b) : ind(a), sum(b) { };
-    };
-
-    std::map<std::string, size_t> getWords(const std::string &path);
-    std::vector<std::string> getSearchPaths(const std::string &dir);
-    std::map<std::string, std::map<size_t, size_t>> getDictionary();
-    void setDictionary(const std::vector<std::string>& vecPaths);
-    std::vector<RI> find(std::string s);
+    static SearchEngine &getInstance () {
+        static SearchEngine instance;
+        return instance;
+    }
 };
