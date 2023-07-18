@@ -6,7 +6,10 @@
   },
   "files": [
     "../resources/txt/2cb.txt",
+    "../resources/txt/anar38",
+    "../resources/txt/art257",
     "../resources/txt/beta.txt",
+    "../resources/txt/chromos.txt",
     "../resources/txt/bbros-09.txt",
     "../resources/txt/bbros-10.txt",
     "../resources/txt/bbrosn11.txt",
@@ -14,11 +17,26 @@
     "../resources/txt/bbrosn13.txt",
     "../resources/txt/drugs.txt",
     "../resources/txt/drugs2.txt",
+    "../resources/txt/extract.txt",
+    "../resources/txt/faq-tryp.txt",
+    "../resources/txt/herbhigh.txt",
+    "../resources/txt/highs.txt",
+    "../resources/txt/lablsd.txt",
+    "../resources/txt/leary001.txt",
+    "../resources/txt/makex.txt",
+    "../resources/txt/mcdermit.txt",
+    "../resources/txt/mg.txt",
+    "../resources/txt/mnewed11.txt",
+    "../resources/txt/picking.txt",
     "../resources/txt/pikhal1.txt",
     "../resources/txt/pikhal2.txt",
     "../resources/txt/pikhal3.txt",
     "../resources/txt/pikhal4.txt",
     "../resources/txt/pikhal5.txt",
-    "../resources/txt/pikhal6.txt"
+    "../resources/txt/pikhal6.txt",
+    "../resources/txt/shrmgrow.txt",
+    "../resources/txt/smrtdrg1.txt",
+    "../resources/txt/usedrugs.txt",
+    "../resources/txt/weeds.txt"
   ]
 }
