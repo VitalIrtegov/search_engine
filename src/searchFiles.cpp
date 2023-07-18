@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
+#include <set>
 #include <boost/tokenizer.hpp>
 #include <filesystem>
 #include <functional>
@@ -23,22 +24,25 @@ std::vector<std::string> SearchEngine::getSearchPaths(const std::string &dir) {
 }
 
 std::vector<RelativeIndex> SearchEngine::find(std::string line) {
-    std::map<std::string, size_t> tempDictionary;
+    std::set<std::string> tempDictionary;
     typedef boost::tokenizer<boost::char_separator<char>> tokenizer;
     boost::char_separator<char> sep("-);|(, :\"\'./[]!_?><%");
 
     std::transform(line.begin(), line.end(), line.begin(), tolower);
     tokenizer tokens(line, sep);
     for (tokenizer::iterator iter = tokens.begin(); iter != tokens.end(); ++iter)
-        tempDictionary.emplace(*iter, tempDictionary[*iter]++);
+        tempDictionary.insert(*iter);
 
     std::vector<RelativeIndex> vec;
     std::vector<RelativeIndex> vecOutput;
     std::map<size_t, size_t> map;
 
     for (const auto &item : tempDictionary) {
-        for (const auto &i : InvertedIndex::getInstance().dictionary.at(item.first)) {
+        if(auto it = InvertedIndex::getInstance().dictionary.find(item); it != InvertedIndex::getInstance().dictionary.end())
+        for (const auto &i :it->second) {
             map[i.first] += i.second;
+        } else {
+            return std::vector<RelativeIndex>{};
         }
     }
     for (const auto &w: map)
@@ -52,6 +56,9 @@ std::vector<RelativeIndex> SearchEngine::find(std::string line) {
 
     for (int i = 0; i < max_response; i++)
         vecOutput.push_back(vec[i]);
+
+    if(vecOutput.empty())
+        return std::vector<RelativeIndex>{};
 
     size_t maxSum = vecOutput.begin()->sum;
 

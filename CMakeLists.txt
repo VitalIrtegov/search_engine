@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.23)
 project(search_engine)
 
+
 set(CMAKE_CXX_STANDARD 17)
 
 set(Boost_INCLUDE_DIR C:/boost_1_81_0/)
@@ -37,11 +38,13 @@ if(MINGW)
     target_link_libraries(search_engine PRIVATE ws2_32 )
 endif()
 
+
+
+project(search_engine_test)
+
 include(GoogleTest)
 
 enable_testing()
-
-project(search_engine_test)
 
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
@@ -52,10 +55,10 @@ add_executable(search_engine_test main_test.cpp include/searchFiles.h src/search
 
 target_link_libraries(search_engine_test PUBLIC gtest gtest_main nlohmann_json::nlohmann_json)
 
-gtest_discover_tests(search_engine_test)
-
 option(TEST "option for debug" OFF)
 
 if (TEST)
     add_definitions(-DTEST)
 endif(TEST)
+
+gtest_discover_tests(search_engine_test)

@@ -26,7 +26,6 @@ void ConvertJSON::readSettings(const std::string &jsonPath) {
     }
 }
 
-/****************** метод *****************/
 std::vector<std::string> ConvertJSON::getRequests(const std::string &jsonPath) {
 
     std::vector<std::string> requests;
@@ -59,7 +58,10 @@ void ConvertJSON::writeAnswers(const myRes &answers, const std::string &jsonPath
 
     for(const auto &answer: answers) {
         jsonAnswers["Answers"][answer.first]["result"] = !answer.second.empty();
-        jsonAnswers["Answers"][answer.first]["relevance"] = answer.second;
+        if (!answer.second.empty()) {
+            jsonAnswers["Answers"][answer.first]["relevance"] = answer.second;
+        }
+
     }
 
     std::ofstream jsonFile(jsonPath);

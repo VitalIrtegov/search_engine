@@ -3,12 +3,13 @@
 //
 #include <iostream>
 #include "gtest/gtest.h"
-#include "include/searchFiles.h"
 #include "include/InvertedIndex.h"
-#include "include/ConvertJSON.h"
+#include "include/searchFiles.h"
+
+#include<vector>
 
 using namespace std;
-//typedef std::vector<std::pair<std::string, std::vector<RelativeIndex>>> myRes;
+typedef std::vector<std::pair<std::string, std::vector<RelativeIndex>>> myRes;
 
 void TestInvertedIndexFunctionality(
         const vector<string>& docs,
@@ -16,10 +17,10 @@ void TestInvertedIndexFunctionality(
         const std::vector<map<size_t,size_t>>& expected
 ) {
     std::vector<map<size_t,size_t>> result;
-    InvertedIndex idx;
-    idx.updateDocumentBase(docs);
+
+    InvertedIndex::getInstance().updateDocumentBase(docs);
     for(auto& request : requests) {
-        map<size_t,size_t> word_count = idx.getWordCount(request);
+        map<size_t,size_t> word_count = InvertedIndex::getInstance().getWordCount(request);
         result.push_back(word_count);
     }
     ASSERT_EQ(result, expected);
@@ -59,8 +60,24 @@ TEST(TestCaseInvertedIndex, TestBasic2) {
                     {3, 1}
             }
     };
+    TestInvertedIndexFunctionality(docs, requests, expected);
 }
 TEST(TestCaseInvertedIndex, TestInvertedIndexMissingWord) {
+    const vector<string> docs = {
+            "a b c d e f g h i j k l",
+            "statement"
+    };
+    const vector<string> requests = {"m", "statement"};
+    const vector<map<size_t,size_t>> expected = {
+            {
+            }, {
+                    {1, 1}
+            }
+    };
+    TestInvertedIndexFunctionality(docs, requests, expected);
+}
+
+TEST(TestCaseInvertedIndex, TestInvertedIndexMissingWord2) {
     const vector<string> docs = {
             "a b c d e f g h i j k l",
             "statement"
@@ -78,35 +95,46 @@ TEST(TestCaseInvertedIndex, TestInvertedIndexMissingWord) {
 
 /*
 TEST(TestCaseSearchServer, TestSimple) {
-    const vector<string> docs = {
-            "milk milk milk milk water water water",
-            "milk water water",
-            "milk milk milk milk milk water water water water water",
-            "americano cappuccino"
-    };
-    const vector<string> request = {"milk water", "sugar"};
-    const std::vector<vector<size_t,float>> expected = {
-            {
-                    {2, 1},
-                    {0, 0.7},
-                    {1, 0.3}
-            },
-            {
-            }
-    };
-    InvertedIndex idx;
-    idx.updateDocumentBase(docs);
-    SearchEngine srv;
-    std::vector<vector<RelativeIndex>> result;
+  const std::vector<string> docs = {
+          "milk milk milk milk water water water",
+          "milk water water",
+          "milk milk milk milk milk water water water water water",
+          "americano cappuccino"
+  };
 
-    myRes result1 = srv.search(request);
+  const std::vector<string> request = {"milk water", "sugar"};
 
-    for(auto& v:result1)
-        result.push_back(v.second);
+  std::vector<vector<std::pair<size_t, float>>> result;
+
+  const std::vector<vector<std::pair<size_t, float>>> expected = {
+               {
+                       {2, 1.0},
+                       {0, 0.7},
+                       {1, 0.3}
+               },
+               {
+
+               }
+       };
+
+
+     InvertedIndex::getInstance().updateDocumentBase(docs);
+
+
+     auto result1 = SearchEngine::getInstance().getAnswers(request);
+
+     for(auto& v:result1)
+     {
+         vector<std::pair<size_t,float>> buf;
+         for(auto& it:v.second)
+             buf.push_back(std::make_pair(it.ind,it.rankInd));
+         result.push_back(buf);
+     }
+
 
     ASSERT_EQ(result, expected);
-}
-*/
+}*/
+
 
 
 int main(int argc, char **argv) {
