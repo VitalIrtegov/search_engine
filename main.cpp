@@ -6,7 +6,7 @@
 int main() {
     //std::string dir = "C:/textTest/";
 
-    ConvertJSON::readSettings("config.json");
+    ConvertJSON::readSettings("../resources/config.json");
     Settings::getInstance().showSettings();
 
     //std::vector<std::string> vecPaths = SearchEngine::getInstance().getSearchPaths(dir);
@@ -14,9 +14,9 @@ int main() {
     std::vector<std::string> vecPaths = Settings::getInstance().files;
     InvertedIndex::getInstance().updateDocumentBase(vecPaths);
 
-    vectorRes res = SearchEngine::getInstance().getAnswers(ConvertJSON::getRequests("Requests.json"));
+    vectorRes res = SearchEngine::getInstance().getAnswers(ConvertJSON::getRequests("../resources/requests.json"));
 
-    ConvertJSON::writeAnswers(res, "Answers.json");
+    ConvertJSON::writeAnswers(res, "../resources/answers.json");
 
     //system("pause");
 }

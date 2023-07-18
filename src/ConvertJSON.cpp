@@ -5,6 +5,7 @@
 #include "../include/ConvertJSON.h"
 #include "../include/searchFiles.h"
 
+/****************** метод чтения config.json файла *****************/
 void ConvertJSON::readSettings(const std::string &jsonPath) {
     nlohmann::json jsonSettings;
     std::ifstream jsonFileSettings(jsonPath);
@@ -14,7 +15,6 @@ void ConvertJSON::readSettings(const std::string &jsonPath) {
         jsonFileSettings.close();
 
         jsonSettings.at("files").get_to(Settings::getInstance().files);
-
         jsonSettings.at("config").at("Name").get_to(Settings::getInstance().name);
         jsonSettings.at("config").at("Version").get_to(Settings::getInstance().version);
         jsonSettings.at("config").at("max_response").get_to(Settings::getInstance().max_response);
@@ -26,6 +26,7 @@ void ConvertJSON::readSettings(const std::string &jsonPath) {
     }
 }
 
+/****************** метод *****************/
 std::vector<std::string> ConvertJSON::getRequests(const std::string &jsonPath) {
 
     std::vector<std::string> requests;
@@ -52,6 +53,7 @@ void to_json(nlohmann::json &j, const RelativeIndex &relativeIndex) {
     };
 }
 
+/****************** метод записи JSON файлов *****************/
 void ConvertJSON::writeAnswers(const myRes &answers, const std::string &jsonPath) {
     nlohmann::json jsonAnswers;
 

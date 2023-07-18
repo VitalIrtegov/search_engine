@@ -26,10 +26,8 @@ public:
         void show() const { std::cout << "Error pars settings '" << file << "'" << std::endl; }
     };
 
-    // static void setSettings(const search_server::Settings& val);
     static void readSettings(const std::string &jsonPath);
     static std::vector<std::string> getRequests(const std::string &jsonPath);
-    // static std::vector<std::string> getRequestsFromString(const std::string& jsonString);
     static void writeAnswers(const myRes &answers, const std::string &jsonPath);
 };
 

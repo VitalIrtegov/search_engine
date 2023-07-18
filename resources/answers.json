@@ -1,0 +1,95 @@
+{
+  "Answers": {
+    "request001": {
+      "relevance": [
+        {
+          "docid": 10,
+          "rank": 1.0
+        },
+        {
+          "docid": 13,
+          "rank": 0.9622557759284973
+        }
+      ],
+      "result": true
+    },
+    "request002": {
+      "relevance": [
+        {
+          "docid": 10,
+          "rank": 1.0
+        },
+        {
+          "docid": 11,
+          "rank": 0.8726287484169006
+        }
+      ],
+      "result": true
+    },
+    "request003": {
+      "relevance": [
+        {
+          "docid": 10,
+          "rank": 1.0
+        },
+        {
+          "docid": 13,
+          "rank": 0.9545454382896423
+        }
+      ],
+      "result": true
+    },
+    "request004": {
+      "relevance": [
+        {
+          "docid": 11,
+          "rank": 1.0
+        },
+        {
+          "docid": 10,
+          "rank": 0.84112149477005
+        }
+      ],
+      "result": true
+    },
+    "request005": {
+      "relevance": [
+        {
+          "docid": 10,
+          "rank": 1.0
+        },
+        {
+          "docid": 5,
+          "rank": 0.75
+        }
+      ],
+      "result": true
+    },
+    "request006": {
+      "relevance": [
+        {
+          "docid": 6,
+          "rank": 1.0
+        },
+        {
+          "docid": 9799838287072637947,
+          "rank": 6.0
+        }
+      ],
+      "result": true
+    },
+    "request007": {
+      "relevance": [
+        {
+          "docid": 6,
+          "rank": 1.0
+        },
+        {
+          "docid": 5,
+          "rank": 0.3333333432674408
+        }
+      ],
+      "result": true
+    }
+  }
+}
