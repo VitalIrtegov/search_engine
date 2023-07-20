@@ -29,10 +29,8 @@ private:
     size_t max_response;
     SearchEngine() = default;
 public:
-    static std::vector<std::string> getSearchPaths(const std::string &dir);
     std::vector<RelativeIndex> find(std::string s);
     vectorRes getAnswers(std::vector<std::string> req);
-    //static void setMaxResponse(size_t max_response);
 
     static SearchEngine &getInstance () {
         static SearchEngine instance;

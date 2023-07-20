@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.23)
 project(search_engine)
 
-
 set(CMAKE_CXX_STANDARD 17)
 
 set(Boost_INCLUDE_DIR C:/boost_1_81_0/)
@@ -28,17 +27,14 @@ FetchContent_MakeAvailable(googletest)
 FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.10.5/json.tar.xz)
 FetchContent_MakeAvailable(json)
 
-
-add_executable(search_engine main.cpp include/searchFiles.h src/searchFiles.cpp src/InvertedIndex.cpp include/InvertedIndex.h
-        include/ConvertJSON.h src/ConvertJSON.cpp)
+add_executable(search_engine main.cpp include/SearchServer.h src/SearchServer.cpp src/InvertedIndex.cpp include/InvertedIndex.h
+        include/ConverterJSON.h src/ConverterJSON.cpp)
 
 target_link_libraries(search_engine PUBLIC ${Boost_LIBRARIES} nlohmann_json::nlohmann_json)
 
 if(MINGW)
     target_link_libraries(search_engine PRIVATE ws2_32 )
 endif()
-
-
 
 project(search_engine_test)
 
@@ -50,8 +46,8 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
-add_executable(search_engine_test main_test.cpp include/searchFiles.h src/searchFiles.cpp src/InvertedIndex.cpp include/InvertedIndex.h
-        include/ConvertJSON.h src/ConvertJSON.cpp)
+add_executable(search_engine_test main_test.cpp include/SearchServer.h src/SearchServer.cpp src/InvertedIndex.cpp include/InvertedIndex.h
+        include/ConverterJSON.h src/ConverterJSON.cpp)
 
 target_link_libraries(search_engine_test PUBLIC gtest gtest_main nlohmann_json::nlohmann_json)
 

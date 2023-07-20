@@ -15,7 +15,7 @@ struct RelativeIndex;
 
 typedef std::vector<std::pair<std::string, std::vector<RelativeIndex>>> myRes;
 
-class ConvertJSON {
+class ConverterJSON {
 public:
 
     struct myExp : public std::exception {

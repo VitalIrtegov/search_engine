@@ -4,7 +4,7 @@
 #include <iostream>
 #include "gtest/gtest.h"
 #include "include/InvertedIndex.h"
-#include "include/searchFiles.h"
+#include "include/SearchServer.h"
 
 #include<vector>
 
@@ -92,7 +92,6 @@ TEST(TestCaseInvertedIndex, TestInvertedIndexMissingWord2) {
     TestInvertedIndexFunctionality(docs, requests, expected);
 }
 
-
 /*
 TEST(TestCaseSearchServer, TestSimple) {
   const std::vector<string> docs = {
@@ -134,8 +133,6 @@ TEST(TestCaseSearchServer, TestSimple) {
 
     ASSERT_EQ(result, expected);
 }*/
-
-
 
 int main(int argc, char **argv) {
 

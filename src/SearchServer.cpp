@@ -1,27 +1,13 @@
 
-#include "../include/searchFiles.h"
+#include "../include/SearchServer.h"
 #include "../include/InvertedIndex.h"
 #include <iostream>
-#include <fstream>
 #include <chrono>
 #include <set>
 #include <boost/tokenizer.hpp>
-#include <filesystem>
 #include <functional>
 
 namespace fs = std::filesystem;
-
-std::vector<std::string> SearchEngine::getSearchPaths(const std::string &dir) {
-    auto recursiveGetFileNamesByExtension = [](const std::string &path) {
-        std::vector<std::string> paths;
-        for(auto &p: fs::recursive_directory_iterator(path))
-            if(p.is_regular_file() && p.path().extension().compare("txt") != 0) {
-                paths.push_back(p.path().string());
-            }
-        return paths;
-    };
-    return std::move(recursiveGetFileNamesByExtension(dir));
-}
 
 std::vector<RelativeIndex> SearchEngine::find(std::string line) {
     std::set<std::string> tempDictionary;

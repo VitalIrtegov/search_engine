@@ -10,7 +10,6 @@
 #include <boost/tokenizer.hpp>
 #include <functional>
 
-
 std::map<std::string, size_t> InvertedIndex::getWords(const std::string &path) {
 
     std::map<std::string, size_t> words;
@@ -55,9 +54,9 @@ void InvertedIndex::updateDocumentBase(const std::vector<std::string> &_paths) {
     auto myIndexation = [this](size_t ind) {
         std::map<std::string, size_t> res = getWords(paths[ind]);
 
-        for (const auto &ii: res) {
+        for (const auto &index: res) {
             std::lock_guard<std::mutex> lock(myMutex);
-            dictionary[ii.first].insert(std::make_pair(ind, ii.second));
+            dictionary[index.first].insert(std::make_pair(ind, index.second));
         }
     };
 

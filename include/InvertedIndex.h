@@ -17,8 +17,7 @@ class InvertedIndex {
     friend class SearchEngine;
 
 public:
-
-    void updateDocumentBase(const std::vector<std::string>& paths);
-    std::map<size_t,size_t> getWordCount(const std::string& s);
-    static InvertedIndex& getInstance ();
+    void updateDocumentBase(const std::vector<std::string> &paths);
+    std::map<size_t,size_t> getWordCount(const std::string &s);
+    static InvertedIndex &getInstance ();
 };
