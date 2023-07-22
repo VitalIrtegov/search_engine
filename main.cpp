@@ -13,6 +13,4 @@ int main() {
 
     vectorRes res = SearchEngine::getInstance().getAnswers(ConverterJSON::getRequests("../resources/requests.json"));
     ConverterJSON::writeAnswers(res, "../resources/answers.json");
-
-
 }

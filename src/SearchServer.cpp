@@ -6,6 +6,8 @@
 #include <set>
 #include <boost/tokenizer.hpp>
 #include <functional>
+#include <fstream>
+#include <filesystem>
 
 namespace fs = std::filesystem;
 

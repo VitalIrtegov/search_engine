@@ -5,6 +5,7 @@
 #include <vector>
 #include <thread>
 
+/***  ***/
 struct RelativeIndex {
     size_t ind;
     size_t sum;
@@ -12,6 +13,7 @@ struct RelativeIndex {
     RelativeIndex(size_t a, size_t b) : ind(a), sum(b), rankInd{} {};
 };
 
+/***  ***/
 struct Settings {
     std::string name;
     std::string version;
@@ -29,7 +31,10 @@ private:
     size_t max_response;
     SearchEngine() = default;
 public:
+    /***  ***/
     std::vector<RelativeIndex> find(std::string s);
+
+    /***  ***/
     vectorRes getAnswers(std::vector<std::string> req);
 
     static SearchEngine &getInstance () {

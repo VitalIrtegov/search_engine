@@ -25,6 +25,7 @@ void ConverterJSON::readSettings(const std::string &jsonPath) {
     }
 }
 
+/****************** метод чтения requests.json файла *****************/
 std::vector<std::string> ConverterJSON::getRequests(const std::string &jsonPath) {
 
     std::vector<std::string> requests;
@@ -46,8 +47,8 @@ std::vector<std::string> ConverterJSON::getRequests(const std::string &jsonPath)
 
 void to_json(nlohmann::json &j, const RelativeIndex &relativeIndex) {
     j = nlohmann::json{
-        {"docid", relativeIndex.ind},
-        {"rank", relativeIndex.rankInd}
+            {"docid", relativeIndex.ind},
+            {"rank", relativeIndex.rankInd}
     };
 }
 
