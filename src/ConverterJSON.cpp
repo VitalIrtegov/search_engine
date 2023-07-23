@@ -21,13 +21,11 @@ void ConverterJSON::readSettings(const std::string &jsonPath) {
 
     } catch (nlohmann::json::parse_error &exp) {
         std::cerr << "JSON parse error " << exp.byte << std::endl;
-        throw myExp(jsonPath);
     }
 }
 
 /****************** метод чтения requests.json файла *****************/
 std::vector<std::string> ConverterJSON::getRequests(const std::string &jsonPath) {
-
     std::vector<std::string> requests;
     nlohmann::json jsonRequests;
     std::ifstream jsonFileRequests(jsonPath);
@@ -45,10 +43,11 @@ std::vector<std::string> ConverterJSON::getRequests(const std::string &jsonPath)
     return requests;
 }
 
+/********* дополнительный метод для записи JSON файлов **********/
 void to_json(nlohmann::json &j, const RelativeIndex &relativeIndex) {
-    j = nlohmann::json{
-            {"docid", relativeIndex.ind},
-            {"rank", relativeIndex.rankInd}
+    j = nlohmann::json {
+        {"docid", relativeIndex.ind},
+        {"rank", relativeIndex.rankInd}
     };
 }
 

@@ -11,12 +11,11 @@
 #include <functional>
 
 std::map<std::string, size_t> InvertedIndex::getWords(const std::string &path) {
-
     std::map<std::string, size_t> words;
 
 #ifndef TEST
     std::ifstream file(path);
-    if(!file.is_open())
+    if (!file.is_open())
         return std::map<std::string, size_t>();
 
     std::string text((std::istreambuf_iterator<char>(file)), (std::istreambuf_iterator<char>()));
@@ -80,12 +79,4 @@ void InvertedIndex::updateDocumentBase(const std::vector<std::string> &_paths) {
 InvertedIndex &InvertedIndex::getInstance() {
     static InvertedIndex instance;
     return instance;
-}
-
-std::map<size_t, size_t> InvertedIndex::getWordCount(const std::string &s) {
-    auto f = dictionary.find(s);
-    if (f != dictionary.end())
-        return (*f).second;
-    else
-        return std::map<size_t, size_t>{};
 }

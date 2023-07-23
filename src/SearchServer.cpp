@@ -58,7 +58,7 @@ std::vector<RelativeIndex> SearchEngine::find(std::string line) {
 
 vectorRes SearchEngine::getAnswers(std::vector<std::string> req) {
     vectorRes res;
-    for(int i = 1;i <= req.size(); i++) {
+    for(int i = 1; i <= req.size(); i++) {
         std::string request = "request";
         request += i < 10 ? "00" + std::to_string(i) : i < 100 ? "0" + std::to_string(i) : std::to_string(i);
         res.push_back(std::make_pair(request, find(req[i-1])));

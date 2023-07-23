@@ -15,17 +15,19 @@ private:
     std::vector<std::string> paths;
     std::mutex myMutex;
 
-    /***  ***/
+    /**
+     * метод находит количество вхождений слова в тексте
+     * @return возвращает количество вхождений
+     */
     std::map<std::string, size_t> getWords(const std::string &path);
+
     friend class SearchEngine;
 
 public:
-    /***  ***/
+    /**
+     * обновление и заполнение базы документов для поиска
+    */
     void updateDocumentBase(const std::vector<std::string> &paths);
 
-    /***  ***/
-    std::map<size_t,size_t> getWordCount(const std::string &s);
-
-    /***  ***/
     static InvertedIndex &getInstance ();
 };
