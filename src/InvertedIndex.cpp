@@ -80,3 +80,11 @@ InvertedIndex &InvertedIndex::getInstance() {
     static InvertedIndex instance;
     return instance;
 }
+
+std::map<size_t, size_t> InvertedIndex::getWordCount(const std::string &s) {
+    auto f = dictionary.find(s);
+    if (f != dictionary.end())
+        return (*f).second;
+    else
+        return std::map<size_t, size_t>{};
+}

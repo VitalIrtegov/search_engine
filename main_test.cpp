@@ -5,11 +5,13 @@
 #include "gtest/gtest.h"
 #include "include/InvertedIndex.h"
 #include "include/SearchServer.h"
+#include <boost/tokenizer.hpp>
+#include <set>
 #include <vector>
 
 using namespace std;
 
-/*void TestInvertedIndexFunctionality(
+void TestInvertedIndexFunctionality(
         const vector<string> &docs,
         const vector<string> &requests,
         const vector<map<size_t,size_t>> &expected
@@ -91,7 +93,18 @@ TEST(TestCaseInvertedIndex, TestInvertedIndexMissingWord2) {
             }
     };
     TestInvertedIndexFunctionality(docs, requests, expected);
-}*/
+}
+
+void requestCount(string &line, set<string> &words) {
+    typedef boost::tokenizer<boost::char_separator<char>> tokenizer;
+    boost::char_separator<char> sep("-);|(, :\"\'./[]!_?><%");
+
+    std::for_each(line.begin(), line.end(), [](char &c) { c = ::tolower(static_cast<unsigned char>(c)); });
+    tokenizer tokens(line, sep);
+
+    for (tokenizer::iterator iter = tokens.begin(); iter != tokens.end(); ++iter)
+        words.insert(*iter);
+}
 
 TEST(TestCaseSearchServer, TestSimple) {
     const vector<string> docs = {
@@ -101,7 +114,14 @@ TEST(TestCaseSearchServer, TestSimple) {
             "americano cappuchino"
     };
 
-    const vector<string> request = {"milk water", "cappuchino"}; // sugar
+    const vector<string> request = {"milk water", "sugar"};
+
+    std::set<std::string> words;
+
+    for(auto i: request)
+        requestCount(i, words);
+
+    SearchEngine::getInstance().setMaxResponse(words.size());
 
     vector<vector<pair<size_t, float>>> result;
 
@@ -119,20 +139,17 @@ TEST(TestCaseSearchServer, TestSimple) {
 
     auto resultAnswers = SearchEngine::getInstance().getAnswers(request);
 
-    //cout << "resultAnswers: " << resultAnswers.size() << endl;
     for(auto &v: resultAnswers) {
         vector<pair<size_t,float>> buf;
-        //cout << "v.second: " << v.second.size() << endl;
         for(auto &it: v.second) {
             buf.push_back(make_pair(it.ind, it.rankInd));
-            //std::cout << "it.rankInd: " << it.rankInd;
         }
         result.push_back(buf);
     }
 
     ASSERT_EQ(result, expected);
-    //ASSERT_EQ(1, 1);
 }
+
 
 int main(int argc, char **argv) {
 

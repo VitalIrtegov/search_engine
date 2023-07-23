@@ -29,5 +29,11 @@ public:
     */
     void updateDocumentBase(const std::vector<std::string> &paths);
 
+    /**
+     *
+     * @return
+     */
+    std::map<size_t,size_t> getWordCount(const std::string &s);
+
     static InvertedIndex &getInstance ();
 };

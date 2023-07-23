@@ -26,19 +26,23 @@ std::vector<RelativeIndex> SearchEngine::find(std::string line) {
     std::map<size_t, size_t> map;
 
     for (const auto &item : tempDictionary) {
-        if(auto it = InvertedIndex::getInstance().dictionary.find(item); it != InvertedIndex::getInstance().dictionary.end())
-        for (const auto &i :it->second) {
-            map[i.first] += i.second;
-        } else {
-            return std::vector<RelativeIndex>{};
+        if(auto it = InvertedIndex::getInstance().dictionary.find(item); it != InvertedIndex::getInstance().dictionary.end()) {
+            for (const auto &i: it->second) {
+                map[i.first] += i.second;
+            }
         }
+        else return std::vector<RelativeIndex>{};
     }
+
     for (const auto &w: map)
         vec.emplace_back(w.first, w.second);
 
     std::sort(vec.begin(), vec.end(), [](const auto &a, const auto &b) { return b.sum < a.sum; });
 
+#ifndef TEST
     max_response = Settings::getInstance().max_response;
+#else
+#endif
 
     max_response = max_response > vecOutput.size() ? max_response : vecOutput.size();
 
@@ -58,12 +62,17 @@ std::vector<RelativeIndex> SearchEngine::find(std::string line) {
 
 vectorRes SearchEngine::getAnswers(std::vector<std::string> req) {
     vectorRes res;
+
     for(int i = 1; i <= req.size(); i++) {
         std::string request = "request";
         request += i < 10 ? "00" + std::to_string(i) : i < 100 ? "0" + std::to_string(i) : std::to_string(i);
         res.push_back(std::make_pair(request, find(req[i-1])));
     }
     return res;
+}
+
+void SearchEngine::setMaxResponse(size_t maxResponse) {
+    max_response = maxResponse;
 }
 
 Settings &Settings::getInstance() {

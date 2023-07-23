@@ -34,6 +34,7 @@ typedef std::vector<std::pair<std::string, std::vector<RelativeIndex>>> vectorRe
 class SearchEngine {
 private:
     size_t max_response;
+
     /**
      * метод расчета и сортировки относительного индекса
      * @return возвращает отсортированный в порядке убывания контейнер с относительным индексом
@@ -46,6 +47,8 @@ public:
      * @return возвращает контейнер с относительным индексом по запросам
      */
     vectorRes getAnswers(std::vector<std::string> req);
+
+    void setMaxResponse(size_t maxResponse);
 
     static SearchEngine &getInstance () {
         static SearchEngine instance;
