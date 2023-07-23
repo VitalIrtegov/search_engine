@@ -1,16 +1,8 @@
 # search_engine
 
-## Description | Описание
-Консольное приложение для поиска слов в текстовых файлах (config.json) по заросу из файла (requests.json)<br>
+## Описание
+SearchEngine - консольное приложение для поиска слов в текстовых файлах (config.json) по заросу из файла (requests.json)<br>
 Результат поиска записывается в answers.json.<br>
-
-Для правильной работы программы потребуется установить библиотеку boost версии 1_81_0
-
-Документация:
-https://www.boost.org/doc/libs/1_81_0/
-
-Файлы:
-https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/
 
 В проекте используюся следующие ресурсы:<br>
 
@@ -22,7 +14,14 @@ https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/
 
 [GoogleTest](https://github.com/google/googletest)<br>
 
-<h3>Формат записи config.json</h3>
+Для правильной работы программы потребуется установить библиотеку boost версии 1_81_0<br>
+
+[Documentation](https://www.boost.org/doc/libs/1_81_0/)<br>
+
+[Files](https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/)<br>
+<br>
+
+<h4>Формат записи config.json</h4>
 
 ```json
 {
@@ -32,10 +31,32 @@ https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/
     "max_responses": 5
   },
   "files": [
-    "resources/file001.txt",
-    "resources/file002.txt",
-    "resources/file003.txt",
-    "resources/file004.txt"
+    "../resources/file001.txt",
+    "../resources/file002.txt",
+    "../resources/file003.txt",
+    "../resources/file004.txt",
+    ...
   ]
 }
 ```
+config - общая информация, обязательно для заполнения.<br>
+name - наименование SearchEngine.<br>
+version - номер версии SearchEngine.<br>
+max_responses - поле, определяющее максимальное количество ответов на один запрос.<br>
+files - пути к файлам, по которым необходимо осуществлять поиск.<br>
+
+<h4>Формат записи requests.json</h4>
+
+```json
+{
+  "requests": [
+      "word",
+      "some words..",
+      "some words..",
+      "some words..",
+      ...
+  ]
+}
+```
+requests - запросы, обязательно для заполнения.<br>
+далее перечисление слов.<br>
